@@ -7,13 +7,12 @@ ERRORS=""
 
 for file in *.ipynb
 do
-    if [ "${file}" = "p1.ipynb" ]; then
-        echo "Skipping ${file}"
-    elif papermill --kernel python3 "${file}" "${file}"; then
-        echo "Sucessfully refreshed ${file}\n\n\n\n"
+    if papermill --kernel python3 “${file}” “${file}“; then
+        echo “Sucessfully refreshed ${file}\n\n\n\n”
+        git add “${file}”
     else
-        echo "ERROR Refreshing ${file}"
-        ERRORS="${ERRORS}, ${file}"
+        echo “ERROR Refreshing ${file}”
+        ERRORS=“${ERRORS}, ${file}”
     fi
 done
 
